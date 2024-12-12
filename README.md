@@ -57,3 +57,6 @@ showModalBottomSheet: For displaying the modal sheet when creating records.
 
 ![Analysis Screen](assets/imgs_description/analysis.png)  
 *Analysis Screen*
+
+![Analysis Screen](assets/imgs_description/categories.png)  
+*Categories Screen*
