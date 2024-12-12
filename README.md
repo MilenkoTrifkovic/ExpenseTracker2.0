@@ -46,13 +46,14 @@ TweenSequenceAnimation: For advanced UI animations.
 showModalBottomSheet: For displaying the modal sheet when creating records.
 ## Screenshots
 
-![Welcome Screen](assets/imgs_description/welcome.png)
-*Welcome Screem*
-![Home Screen](assets/imgs_description/home.png)
-*Welcome Screem*
-![New Record Screen](assets/imgs_description/newRecord.png)
-*Welcome Screem*
-![Analysis Screen](assets/imgs_description/analysis.png)
-*Welcome Screem*
+![Welcome Screen](assets/imgs_description/welcome.png)  
+*Welcome Screen*
 
+![Home Screen](assets/imgs_description/home.png)  
+*Home Screen*
 
+![New Record Screen](assets/imgs_description/newRecord.png)  
+*New Record Screen*
+
+![Analysis Screen](assets/imgs_description/analysis.png)  
+*Analysis Screen*
