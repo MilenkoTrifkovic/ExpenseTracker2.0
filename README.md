@@ -46,6 +46,6 @@ TweenSequenceAnimation: For advanced UI animations.
 showModalBottomSheet: For displaying the modal sheet when creating records.
 ## Screenshots
 
-![Home Screen](assets/imgs_category/car.png)
+![Home Screen](assets/imgs_description/welcome.png)
 
 *Example of the home screen showing income and expense records.*
