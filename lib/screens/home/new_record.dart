@@ -159,11 +159,9 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
                 children: [
                   //SPACE FOR TRANSACTION BUTTONS//
                   const SizedBox(
-                    height: 40,
+                    height: 45,
                   ), 
-                  const SizedBox(
-                    height: 5,
-                  ),
+                  
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.textColor,
