@@ -1,9 +1,10 @@
 import 'package:expense_tracker_2/models/category.dart';
 import 'package:expense_tracker_2/models/record.dart';
 import 'package:expense_tracker_2/services/firestore_service.dart';
-import 'package:expense_tracker_2/shared/styled_text.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NewRecord extends StatefulWidget {
   const NewRecord({super.key});
@@ -53,6 +54,7 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
     _selectedCategory = expenseCategories[0];
     super.initState();
   }
+
   @override
   void dispose() {
     super.dispose();
@@ -160,56 +162,108 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
                   //SPACE FOR TRANSACTION BUTTONS//
                   const SizedBox(
                     height: 45,
-                  ), 
-                  
+                  ),
                   ElevatedButton(
+                      //CATEGORY SECTION//
                       style: ElevatedButton.styleFrom(
                           foregroundColor: AppColors.textColor,
-                          backgroundColor:
-                              AppColors.primaryAccent.withOpacity(0.1)),
+                          backgroundColor: AppColors.primaryColor),
                       onPressed: () {
-                        showModalBottomSheet<void>(
+                        showDialog(
                           context: context,
                           builder: (context) {
-                            return Container(
-                              color: AppColors.primaryAccent.withOpacity(0.9),
-                              padding: const EdgeInsets.all(20),
-                              child: GridView.count(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 40),
-                                mainAxisSpacing: 40,
-                                crossAxisSpacing: 60,
-                                crossAxisCount: 2,
-                                children: (_selectedTransaction == 'expense'
-                                        ? expenseCategories
-                                        : incomeCategories)
-                                    .map((e) {
-                                  return ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                          foregroundColor: Colors.black,
-                                          backgroundColor:
-                                              Colors.white.withOpacity(0.5)),
-                                      onPressed: () {
-                                        setState(() {
-                                          _selectedCategory = e;
-                                        });
-                                        Navigator.pop(context);
-                                      },
-                                      child: Column(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          // Icon(Icons.),
-                                          Text(
-                                            e.categoryName,
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold),
-                                          )
-                                        ],
-                                      ));
-                                }).toList(),
-                              ),
+                            return Dialog(
+                              backgroundColor:
+                                  AppColors.surfaceColor.withOpacity(0.90),
+                              // padding: const EdgeInsets.all(20),
+                              child:
+                                  LayoutBuilder(builder: (context, constrains) {
+                                int crossAxisCount =
+                                    (constrains.maxWidth / 150).floor();
+                                if (crossAxisCount > 4) {
+                                  crossAxisCount = 4;
+                                }
+                                return Container(
+                                  child: Column(
+                                    children: [
+                                      StyledTitle('Select one option'),
+                                      SizedBox(
+                                        height: 60,
+                                      ),
+                                      Expanded(
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              // You can use Expanded if the child should occupy all available space
+                                              child: Container(
+                                                child: GridView.count(
+                                                  padding: const EdgeInsets
+                                                      .symmetric(
+                                                      horizontal: 40),
+                                                  mainAxisSpacing: 80,
+                                                  crossAxisSpacing:
+                                                      80, // If needed, uncomment this line
+                                                  crossAxisCount:
+                                                      crossAxisCount,
+                                                  // shrinkWrap:
+                                                  //     true, // Prevents it from taking too much space
+                                                  // physics:
+                                                  // NeverScrollableScrollPhysics(), // Disables internal scrolling
+                                                  children:
+                                                      (_selectedTransaction ==
+                                                                  'expense'
+                                                              ? expenseCategories
+                                                              : incomeCategories)
+                                                          .map((e) {
+                                                    return ElevatedButton(
+                                                      style: ElevatedButton
+                                                          .styleFrom(
+                                                        foregroundColor:
+                                                            Colors.black,
+                                                        backgroundColor: Colors
+                                                            .white
+                                                            .withOpacity(0.5),
+                                                      ),
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          _selectedCategory = e;
+                                                        });
+                                                        Navigator.pop(context);
+                                                      },
+                                                      child: Column(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          FittedBox(
+                                                              child:
+                                                                  Image.asset(e.icon, width:50, height: 50,)
+                                                                  ),
+                                                          FittedBox(
+                                                            child: Text(
+                                                              e.categoryName,
+                                                              style: const TextStyle(
+                                                                  color: Colors
+                                                                      .black,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  }).toList(),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }),
                             );
                           },
                         );
@@ -268,71 +322,6 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
                     ],
                   ),
                   const Expanded(child: SizedBox()),
-                  SizedBox(
-                    height: 345,
-                    child: GridView.count(
-                        childAspectRatio: (6 / 3),
-                        crossAxisCount: 3,
-                        crossAxisSpacing: 20,
-                        mainAxisSpacing: 20,
-                        children: [
-                          for (int x = 1; x <= 9; x++)
-                            ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: Colors.black.withOpacity(0.5),
-                                foregroundColor: Colors.white,
-                                shape: const BeveledRectangleBorder(),
-                              ),
-                              onPressed: () {
-                                setState(() {
-                                  _insertedAmount =
-                                      _insertedAmount + x.toString();
-                                });
-                              },
-                              child: Text(x.toString()),
-                            ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black.withOpacity(0.5),
-                              foregroundColor: Colors.white,
-                              shape: const BeveledRectangleBorder(),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _insertedAmount = '$_insertedAmount.';
-                              });
-                            },
-                            child: const Text('.'),
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black.withOpacity(0.5),
-                              foregroundColor: Colors.white,
-                              shape: const BeveledRectangleBorder(),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _insertedAmount = '${_insertedAmount}0';
-                              });
-                            },
-                            child: const Text('0'),
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black.withOpacity(0.5),
-                              foregroundColor: Colors.white,
-                              shape: const BeveledRectangleBorder(),
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                _insertedAmount = _insertedAmount.substring(
-                                    0, _insertedAmount.length - 1);
-                              });
-                            },
-                            child: const Icon(Icons.backspace),
-                          ),
-                        ]),
-                  ),
 
                   //END OF PRICE SECTION//
                   //TIME SECTION//
@@ -340,26 +329,30 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
                     children: [
                       Expanded(
                         child: TextField(
-                          style: const TextStyle(
-                            color: Colors.white,
+                          style: TextStyle(
+                            color: AppColors.textColor,
                           ),
                           controller: _dateController,
                           readOnly: true,
                           decoration: InputDecoration(
                               fillColor: Colors.black.withOpacity(0.3),
-                              labelStyle: const TextStyle(color: Colors.white),
-                              labelText: 'Date',
+                              labelStyle: TextStyle(color: AppColors.textColor),
+                              labelText: "Date",
+                              // hintText: DateFormat('yyy-MM-dd').format(_selectedDate),
+                              // hintStyle: TextStyle(color: AppColors.textColor, fontSize: 16 ),
                               filled: true,
-                              prefixIcon: const Icon(
+                              prefixIcon: Icon(
                                 Icons.calendar_today,
-                                color: Colors.white,
+                                color: AppColors.textColor,
                               ),
                               enabledBorder: const OutlineInputBorder(
                                   borderSide: BorderSide.none),
                               focusedBorder: const OutlineInputBorder(
                                   borderSide: BorderSide(color: Colors.blue))),
-                          onTap: () async {
-                            _selectedDate = await _selectDate();
+                          onTap: () {
+                            setState(() async {
+                              _selectedDate = await _selectDate();
+                            });
                           },
                         ),
                       ),
@@ -389,3 +382,70 @@ class _NewRecordState extends State<NewRecord> with TickerProviderStateMixin {
     return picked!;
   }
 }
+                  // NOT NEEDED ON THE DESKTOP UI
+
+                  // SizedBox(
+                  //   height: 345,
+                  //   child: GridView.count(
+                  //       childAspectRatio: (6 / 3),
+                  //       crossAxisCount: 3,
+                  //       crossAxisSpacing: 20,
+                  //       mainAxisSpacing: 20,
+                  //       children: [
+                  //         for (int x = 1; x <= 9; x++)
+                  //           ElevatedButton(
+                  //             style: ElevatedButton.styleFrom(
+                  //               backgroundColor: Colors.black.withOpacity(0.5),
+                  //               foregroundColor: Colors.white,
+                  //               shape: const BeveledRectangleBorder(),
+                  //             ),
+                  //             onPressed: () {
+                  //               setState(() {
+                  //                 _insertedAmount =
+                  //                     _insertedAmount + x.toString();
+                  //               });
+                  //             },
+                  //             child: Text(x.toString()),
+                  //           ),
+                  //         ElevatedButton(
+                  //           style: ElevatedButton.styleFrom(
+                  //             backgroundColor: Colors.black.withOpacity(0.5),
+                  //             foregroundColor: Colors.white,
+                  //             shape: const BeveledRectangleBorder(),
+                  //           ),
+                  //           onPressed: () {
+                  //             setState(() {
+                  //               _insertedAmount = '$_insertedAmount.';
+                  //             });
+                  //           },
+                  //           child: const Text('.'),
+                  //         ),
+                  //         ElevatedButton(
+                  //           style: ElevatedButton.styleFrom(
+                  //             backgroundColor: Colors.black.withOpacity(0.5),
+                  //             foregroundColor: Colors.white,
+                  //             shape: const BeveledRectangleBorder(),
+                  //           ),
+                  //           onPressed: () {
+                  //             setState(() {
+                  //               _insertedAmount = '${_insertedAmount}0';
+                  //             });
+                  //           },
+                  //           child: const Text('0'),
+                  //         ),
+                  //         ElevatedButton(
+                  //           style: ElevatedButton.styleFrom(
+                  //             backgroundColor: Colors.black.withOpacity(0.5),
+                  //             foregroundColor: Colors.white,
+                  //             shape: const BeveledRectangleBorder(),
+                  //           ),
+                  //           onPressed: () {
+                  //             setState(() {
+                  //               _insertedAmount = _insertedAmount.substring(
+                  //                   0, _insertedAmount.length - 1);
+                  //             });
+                  //           },
+                  //           child: const Icon(Icons.backspace),
+                  //         ),
+                  //       ]),
+                  // ),

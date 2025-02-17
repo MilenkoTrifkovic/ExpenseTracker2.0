@@ -40,4 +40,19 @@ class TransactionRecord {
 
     return transactionRecord;
   }
+  factory TransactionRecord.fromJson(Map<String, dynamic> json) {
+    final dateMap = json['date'] as Map<String, dynamic>;
+    final date =
+        DateTime.fromMillisecondsSinceEpoch(dateMap['_seconds'] * 1000);
+    return TransactionRecord(
+      date: date,
+      transaction: json!['transaction'],
+      category: Category(
+          categoryName: json!['category_name'], icon: json['category_icon']),
+      description: json!['description'],
+      price: (json['price'] is int)
+          ? (json['price'] as int).toDouble()
+          : json['price'].toDouble(),
+    );
+  }
 }

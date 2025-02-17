@@ -1,6 +1,6 @@
 import 'package:expense_tracker_2/screens/welcome/sign_in.dart';
 import 'package:expense_tracker_2/screens/welcome/sign_up.dart';
-import 'package:expense_tracker_2/shared/styled_text.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {

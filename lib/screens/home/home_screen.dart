@@ -1,7 +1,7 @@
 import 'package:expense_tracker_2/providers/record_store_provider.dart';
 import 'package:expense_tracker_2/screens/home/new_record.dart';
-import 'package:expense_tracker_2/shared/styled_text.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:expense_tracker_2/widgets/date_navigator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

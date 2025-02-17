@@ -9,33 +9,45 @@ class AuthServices {
       final UserCredential _userCredential = await _firebaseAuth
           .createUserWithEmailAndPassword(email: email, password: password);
       if (_userCredential.user != null) {
+        final String token = (await _userCredential.user!.getIdToken()) ?? '';
+
         return AppUser(
             email: _userCredential.user!.email!,
-            uid: _userCredential.user!.uid);
+            uid: _userCredential.user!.uid,
+            // token: token
+            );
       }
     } catch (e) {
       return null;
     }
   }
-  static Future<AppUser?> signIn(String email, String password)async{
-    try{
-      final UserCredential _userCredential = await _firebaseAuth.signInWithEmailAndPassword(email: email, password: password);
-      if(_userCredential.user != null){
-          return AppUser(email: _userCredential.user!.email!, uid: _userCredential.user!.uid);
-      }
-    }catch(e){
+
+  static void signIn(String email, String password) async {
+  // static Future<AppUser?> signIn(String email, String password) async {
+    try {
+      final UserCredential _userCredential = await _firebaseAuth
+          .signInWithEmailAndPassword(email: email, password: password);
+      // if (_userCredential.user != null) {
+        // final String token = (await _userCredential.user!.getIdToken()) ?? '';
+
+        // return AppUser(
+        //     email: _userCredential.user!.email!,
+        //     uid: _userCredential.user!.uid,
+        //     token: token);
+      // }
+    } catch (e) {
       print("Error during sign-in: $e"); // Log the error for debugging
-      return null;
+      // return null;
     }
   }
-  static Future<void> signOut()async{
-  try {
+
+  static Future<void> signOut() async {
+    try {
       await _firebaseAuth.signOut();
       print("User signed out successfully.");
     } catch (e) {
       print("Error signing out: $e");
       // You can throw or handle the error further if needed.
     }
-
   }
 }

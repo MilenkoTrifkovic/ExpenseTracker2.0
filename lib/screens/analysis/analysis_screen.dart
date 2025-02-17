@@ -1,7 +1,7 @@
 import 'package:expense_tracker_2/models/category.dart';
 import 'package:expense_tracker_2/models/record.dart';
 import 'package:expense_tracker_2/providers/record_store_provider.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:expense_tracker_2/widgets/date_navigator.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +23,7 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
   ];
   final List<bool> _selectedButtons = <bool>[true, false];
   String _transactionType = 'income';
-    //DATE NAVIGATOR FUNCTIONS//
+  //DATE NAVIGATOR FUNCTIONS//
   void _moveToNextMonth() {
     setState(() {
       selectedPeriod = DateTime(
@@ -37,6 +37,7 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
           selectedPeriod.year, selectedPeriod.month - 1, selectedPeriod.day);
     });
   }
+
   //END OF DATE NAVIGATOR FUNCTIONS//
   @override
   Widget build(BuildContext context) {
@@ -45,7 +46,10 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            DateNavigatorContainer(selectedDate: selectedPeriod, onPrevious: _moveToPreviousMonth, onNext: _moveToNextMonth),
+            DateNavigatorContainer(
+                selectedDate: selectedPeriod,
+                onPrevious: _moveToPreviousMonth,
+                onNext: _moveToNextMonth),
             ToggleButtons(
               direction: Axis.horizontal,
               onPressed: (int index) {
@@ -84,15 +88,21 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
 //PIE CHART FUNCTIONS//
   Widget _buildPieChart() {
     return Center(
-      child: PieChart(PieChartData(
-        sections: pieChartSection(transaction: _transactionType),
-        sectionsSpace: 1,
-        centerSpaceRadius: 0,
-      )),
+      child: Expanded(
+        child: LayoutBuilder(
+          builder: (context, constrains) {
+            return PieChart(PieChartData(
+              sections: pieChartSection(transaction: _transactionType, constrains: constrains),
+              sectionsSpace: 1,
+              centerSpaceRadius: 0,
+            ));
+          }
+        ),
+      ),
     );
   }
 
-  List<PieChartSectionData> pieChartSection({required String transaction}) {
+  List<PieChartSectionData> pieChartSection({required String transaction, required BoxConstraints constrains}) {
     List<Color> colors = [
       Colors.red,
       Colors.blue,
@@ -103,9 +113,9 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
     ];
     Set<TransactionRecord> records = ref.watch(recordsNotifierProvider);
     Map<String, double> balance = {};
-    for (var rec in records.where(
-      (element) => element.transaction == transaction && element.date.month == selectedPeriod.month
-    )) {
+    for (var rec in records.where((element) =>
+        element.transaction == transaction &&
+        element.date.month == selectedPeriod.month)) {
       balance.update(
         rec.category.categoryName,
         (existingValue) => existingValue + rec.price,
@@ -117,11 +127,11 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
       (index) {
         var entry = balance.entries.elementAt(index);
         return PieChartSectionData(
-// There will be an exception if the Pie charts don't have the same number of slices
-//Enabled animation could be a problem
+        // There will be an exception if the Pie charts don't have the same number of slices
+        //Enabled animation could be a problem
             value: entry.value,
             color: colors[index],
-            radius: 120,
+            radius: constrains.maxWidth < constrains.maxHeight? constrains.maxWidth * 0.4:constrains.maxHeight*0.4,
             title: entry.value.toString(),
             titleStyle: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold),

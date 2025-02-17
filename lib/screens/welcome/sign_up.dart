@@ -1,5 +1,5 @@
 import 'package:expense_tracker_2/services/auth_services.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:flutter/material.dart';
 
 class SignUp extends StatefulWidget {

@@ -1,33 +1,37 @@
+import 'package:expense_tracker_2/Theme/date_picker_theme.dart';
 import 'package:flutter/material.dart';
 
 class AppColors {
   static Color primaryColor =
-      const Color.fromRGBO(30, 30, 30, 1); // Very dark background
+      const Color.fromRGBO(15, 15, 15, 1); // Deep black for the background
   static Color primaryAccent =
-      const Color.fromARGB(64, 109, 97, 59); // Dark orange accent
-  static Color secondaryColor = const Color.fromRGBO(
-      45, 45, 45, 1); // Darker grey for cards or containers
+      const Color.fromRGBO(180, 85, 30, 1); // Deep dark orange
+  static Color secondaryColor =
+      const Color.fromRGBO(25, 25, 25, 1); // Dark grey for containers/cards
   static Color secondaryAccent =
-      const Color.fromRGBO(60, 40, 30, 1); // Muted dark orange
+      const Color.fromRGBO(140, 65, 25, 1); // Muted dark orange variation
   static Color titleColor =
-      const Color.fromRGBO(230, 230, 230, 1); // Light grey for titles
+      const Color.fromRGBO(230, 220, 210, 1); // Warm off-white for titles
   static Color textColor =
-      const Color.fromRGBO(200, 200, 200, 1); // Lighter grey for general text
+      const Color.fromRGBO(200, 190, 180, 1); // Soft beige for readability
   static Color successColor =
-      const Color.fromRGBO(20, 110, 90, 1); // Muted green for success
-  static Color highlightColor = const Color.fromRGBO(
-      200, 100, 20, 1); // Bright dark orange for highlights
+      const Color.fromRGBO(40, 160, 120, 1); // Rich teal-green for success
+  static Color highlightColor =
+      const Color.fromRGBO(200, 90, 40, 1); // Strong dark orange for highlights
+  static Color surfaceColor =
+      const Color.fromRGBO(35, 35, 35, 1); // Dark grey for surfaces
 }
 
 ThemeData primaryTheme = ThemeData(
+    datePickerTheme: DatePickerThemeConfig.getTheme(),
     colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
     scaffoldBackgroundColor: AppColors.secondaryColor,
     appBarTheme: AppBarTheme(color: AppColors.primaryColor),
     navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle:
-            MaterialStateProperty.all(TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+        labelTextStyle: MaterialStateProperty.all(
+            TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
     cardTheme: CardTheme(
-      color: AppColors.secondaryAccent,
+      color: AppColors.secondaryColor,
       surfaceTintColor: Colors.transparent,
       shape: const RoundedRectangleBorder(),
       shadowColor: Colors.transparent,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:expense_tracker_2/shared/styled_text.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 
 class DateNavigatorContainer extends StatelessWidget {
   final DateTime selectedDate;
@@ -19,10 +19,10 @@ class DateNavigatorContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     String formattedDate = DateFormat('MMMM yyyy').format(selectedDate);
 
-    return Container(
-      decoration: BoxDecoration(
-        color: AppColors.primaryColor.withOpacity(0.1),
-      ),
+    return Center(
+      // decoration: BoxDecoration(
+      //   color: AppColors.primaryColor.withOpacity(0.1),
+      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

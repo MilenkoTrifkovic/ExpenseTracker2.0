@@ -2,7 +2,7 @@ import 'package:expense_tracker_2/models/app_user.dart';
 import 'package:expense_tracker_2/providers/auth_proider.dart';
 import 'package:expense_tracker_2/screens/welcome/welcome_screen.dart';
 import 'package:expense_tracker_2/navigation_menu.dart';
-import 'package:expense_tracker_2/theme.dart';
+import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

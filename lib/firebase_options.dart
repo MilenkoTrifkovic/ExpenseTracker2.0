@@ -28,15 +28,9 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -50,20 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyDnuFJCyRTEaLK4uhtUFP2w-IB6bQMlfEU',
-    appId: '1:216245500552:android:54d426690b213121d2fd3d',
-    messagingSenderId: '216245500552',
-    projectId: 'expense-tracker-e4f4c',
-    storageBucket: 'expense-tracker-e4f4c.firebasestorage.app',
+    apiKey: 'AIzaSyAV3fp8TNpmrZNAdbtS_iq1CvPUrTMs4uQ',
+    appId: '1:754618202147:android:207f2bc6bf2d24f7d55996',
+    messagingSenderId: '754618202147',
+    projectId: 'vital-range-448621-q8',
+    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyD9uXbm85Nj-TUIgrEWD8Fjck76WSb5AQE',
-    appId: '1:216245500552:ios:68e33635b4c5b847d2fd3d',
-    messagingSenderId: '216245500552',
-    projectId: 'expense-tracker-e4f4c',
-    storageBucket: 'expense-tracker-e4f4c.firebasestorage.app',
+    apiKey: 'AIzaSyBUVk3k7s83vCVMhbzOsynJEE3gMCRfKUs',
+    appId: '1:754618202147:ios:9b77825a8ba6a2f7d55996',
+    messagingSenderId: '754618202147',
+    projectId: 'vital-range-448621-q8',
+    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
     iosBundleId: 'com.example.expenseTracker2',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyBUVk3k7s83vCVMhbzOsynJEE3gMCRfKUs',
+    appId: '1:754618202147:ios:9b77825a8ba6a2f7d55996',
+    messagingSenderId: '754618202147',
+    projectId: 'vital-range-448621-q8',
+    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
+    iosBundleId: 'com.example.expenseTracker2',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyB3Wfj60XsesAKBGTYyYrEvFUdgalxT0vA',
+    appId: '1:754618202147:web:488c208ef38be2c2d55996',
+    messagingSenderId: '754618202147',
+    projectId: 'vital-range-448621-q8',
+    authDomain: 'vital-range-448621-q8.firebaseapp.com',
+    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
   );
 
 }
