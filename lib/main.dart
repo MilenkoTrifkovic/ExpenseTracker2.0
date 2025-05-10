@@ -1,7 +1,7 @@
 import 'package:expense_tracker_2/models/app_user.dart';
 import 'package:expense_tracker_2/providers/auth_proider.dart';
 import 'package:expense_tracker_2/screens/welcome/welcome_screen.dart';
-import 'package:expense_tracker_2/navigation_menu.dart';
+import 'package:expense_tracker_2/navigation/navigation_menu.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -23,14 +23,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Expense Tracker',
-      theme: primaryTheme,
+      theme: primaryTheme, 
       home: Consumer(builder: (context, ref, child) {
         AsyncValue<AppUser?> user = ref.watch(authProvider);
         return user.when(
           data: (user) {
             if(user == null){
-              return WelcomeScreen();
+              return const WelcomeScreen();
             }return const NavigationMenu();
           }, 
         error: (error, stackTrace) => const Text("error loading"), 

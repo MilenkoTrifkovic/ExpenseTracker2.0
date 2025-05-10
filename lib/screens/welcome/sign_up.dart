@@ -1,6 +1,7 @@
-import 'package:expense_tracker_2/services/auth_services.dart';
+import 'package:expense_tracker_2/services/firebase_services/auth_services.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -18,6 +19,9 @@ class _SignUpState extends State<SignUp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: AppColors.primaryColor, // Replace with your AppBar color
+    ));
     return Form(
       key: _formKey,
       child: Padding(

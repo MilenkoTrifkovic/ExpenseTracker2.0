@@ -23,36 +23,50 @@ class AppColors {
 }
 
 ThemeData primaryTheme = ThemeData(
-    datePickerTheme: DatePickerThemeConfig.getTheme(),
-    colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
-    scaffoldBackgroundColor: AppColors.secondaryColor,
-    appBarTheme: AppBarTheme(color: AppColors.primaryColor),
-    navigationBarTheme: NavigationBarThemeData(
-        labelTextStyle: MaterialStateProperty.all(
-            TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
-    cardTheme: CardTheme(
-      color: AppColors.secondaryColor,
-      surfaceTintColor: Colors.transparent,
-      shape: const RoundedRectangleBorder(),
-      shadowColor: Colors.transparent,
-      margin: const EdgeInsets.only(bottom: 16),
+  datePickerTheme: DatePickerThemeConfig.getTheme(),
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
+  scaffoldBackgroundColor: AppColors.secondaryColor,
+  appBarTheme: AppBarTheme(color: AppColors.primaryColor),
+  navigationBarTheme: NavigationBarThemeData(
+      labelTextStyle: MaterialStateProperty.all(
+          const TextStyle(color: Colors.white, fontWeight: FontWeight.bold))),
+  cardTheme: CardTheme(
+    color: AppColors.secondaryColor,
+    surfaceTintColor: Colors.transparent,
+    shape: const RoundedRectangleBorder(),
+    shadowColor: Colors.transparent,
+    margin: const EdgeInsets.only(bottom: 16),
+  ),
+  textTheme: TextTheme(
+    //Body large is in TextFormField
+    bodyLarge: TextStyle(color: AppColors.textColor),
+    bodyMedium: TextStyle(
+      color: AppColors.textColor,
+      fontSize: 16,
+      letterSpacing: 1,
     ),
-    textTheme: TextTheme(
-      bodyMedium: TextStyle(
-        color: AppColors.textColor,
-        fontSize: 16,
-        letterSpacing: 1,
-      ),
-      headlineMedium: TextStyle(
-        color: AppColors.titleColor,
-        fontSize: 16,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 1,
-      ),
-      titleMedium: TextStyle(
-        color: AppColors.textColor,
-        fontSize: 18,
-        fontWeight: FontWeight.bold,
-        letterSpacing: 2,
-      ),
-    ));
+    headlineMedium: TextStyle(
+      color: AppColors.titleColor,
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 1,
+    ),
+    titleMedium: TextStyle(
+      color: AppColors.textColor,
+      fontSize: 18,
+      fontWeight: FontWeight.bold,
+      letterSpacing: 2,
+    ),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    cursorColor: AppColors.textColor,
+    
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    labelStyle: TextStyle(color: AppColors.textColor.withOpacity(0.6)),
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.highlightColor)
+    
+    ),
+  ),
+);

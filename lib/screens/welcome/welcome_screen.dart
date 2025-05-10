@@ -1,10 +1,11 @@
 import 'package:expense_tracker_2/screens/welcome/sign_in.dart';
 import 'package:expense_tracker_2/screens/welcome/sign_up.dart';
+import 'package:expense_tracker_2/screens/welcome/widgets/facebook_auth.dart';
 import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 
 class WelcomeScreen extends StatefulWidget {
-  WelcomeScreen({super.key});
+  const WelcomeScreen({super.key});
 
   @override
   State<WelcomeScreen> createState() => _WelcomeScreenState();
@@ -28,7 +29,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
           const Expanded(
             child: SizedBox(
               height: 20,
-              child: Center(child: const StyledTitle("Welcome")),
+              child: Center(child: StyledTitle("Welcome")),
             ),
           ),
           if (_isSignUp)
@@ -57,7 +58,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     child: const Text("No account? Sign Up!"))
               ],
             ),
-          Expanded(child: SizedBox())
+          const FacebookAuthWidget(),
+          const Expanded(child: SizedBox())
         ],
       ),
     );

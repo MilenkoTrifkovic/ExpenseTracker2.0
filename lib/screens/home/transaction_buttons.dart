@@ -21,7 +21,7 @@ class _TransactionButtonsState extends State<TransactionButtons>
   void initState() {
     //INCOME BUTTON//
     _controllerIncome = AnimationController(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       vsync: this,
     );
     _sizeAnimationIncome = TweenSequence<double>([
@@ -31,7 +31,7 @@ class _TransactionButtonsState extends State<TransactionButtons>
     //END OF INCOME BUTTON//
     //EXPENSE BUTTON//
     _controllerExpense =
-        AnimationController(duration: Duration(milliseconds: 300), vsync: this);
+        AnimationController(duration: const Duration(milliseconds: 300), vsync: this);
     _sizeAnimationExpense = TweenSequence<double>([
       TweenSequenceItem(tween: Tween(begin: 16, end: 25), weight: 50),
       TweenSequenceItem(tween: Tween(begin: 25, end: 16), weight: 50),
@@ -42,7 +42,6 @@ class _TransactionButtonsState extends State<TransactionButtons>
   }
 
   @override
-  static late String selectedTransaction;
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -53,7 +52,6 @@ class _TransactionButtonsState extends State<TransactionButtons>
               setState(() {
                 _controllerIncome.reset();
                 _controllerIncome.forward();
-                selectedTransaction = 'income';
               });
             },
             child: AnimatedBuilder(
@@ -72,7 +70,6 @@ class _TransactionButtonsState extends State<TransactionButtons>
               setState(() {
                 _controllerExpense.reset();
                 _controllerExpense.forward();
-                selectedTransaction = 'expense';
               });
             },
             child: AnimatedBuilder(

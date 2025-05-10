@@ -1,5 +1,4 @@
 import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class RecordCard extends StatelessWidget {
@@ -38,7 +37,7 @@ class RecordCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 StyledHeading(transaction),
-                StyledText(description.length > 20
+                StyledText(text : description.length > 20
                     ? '${description.substring(0, 20)}...'
                     : description),
               ],
@@ -49,7 +48,7 @@ class RecordCard extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Column(
               children: [
-                StyledText(date.toString().split(' ')[0]),
+                StyledText(text: date.toString().split(' ')[0]),
                 StyledTitle('\$${price.toStringAsFixed(2)}'),
               ],
             ),
@@ -57,6 +56,5 @@ class RecordCard extends StatelessWidget {
         ],
       ),
     );
-    ;
   }
 }

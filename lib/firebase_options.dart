@@ -44,38 +44,38 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyAV3fp8TNpmrZNAdbtS_iq1CvPUrTMs4uQ',
-    appId: '1:754618202147:android:207f2bc6bf2d24f7d55996',
-    messagingSenderId: '754618202147',
-    projectId: 'vital-range-448621-q8',
-    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
+    apiKey: 'AIzaSyAGjTvFkKZda7qDh1TTrqPwPkgYC76_b7E',
+    appId: '1:75814891396:android:a5502330afc0a20a2737d1',
+    messagingSenderId: '75814891396',
+    projectId: 'expense-tracker-455519',
+    storageBucket: 'expense-tracker-455519.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBUVk3k7s83vCVMhbzOsynJEE3gMCRfKUs',
-    appId: '1:754618202147:ios:9b77825a8ba6a2f7d55996',
-    messagingSenderId: '754618202147',
-    projectId: 'vital-range-448621-q8',
-    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
+    apiKey: 'AIzaSyADmQSOOg7oKYh4MBa7WNOyRGxs4OlxjmY',
+    appId: '1:75814891396:ios:23e273bfdea805362737d1',
+    messagingSenderId: '75814891396',
+    projectId: 'expense-tracker-455519',
+    storageBucket: 'expense-tracker-455519.firebasestorage.app',
     iosBundleId: 'com.example.expenseTracker2',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyBUVk3k7s83vCVMhbzOsynJEE3gMCRfKUs',
-    appId: '1:754618202147:ios:9b77825a8ba6a2f7d55996',
-    messagingSenderId: '754618202147',
-    projectId: 'vital-range-448621-q8',
-    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
+    apiKey: 'AIzaSyADmQSOOg7oKYh4MBa7WNOyRGxs4OlxjmY',
+    appId: '1:75814891396:ios:23e273bfdea805362737d1',
+    messagingSenderId: '75814891396',
+    projectId: 'expense-tracker-455519',
+    storageBucket: 'expense-tracker-455519.firebasestorage.app',
     iosBundleId: 'com.example.expenseTracker2',
   );
 
   static const FirebaseOptions windows = FirebaseOptions(
-    apiKey: 'AIzaSyB3Wfj60XsesAKBGTYyYrEvFUdgalxT0vA',
-    appId: '1:754618202147:web:488c208ef38be2c2d55996',
-    messagingSenderId: '754618202147',
-    projectId: 'vital-range-448621-q8',
-    authDomain: 'vital-range-448621-q8.firebaseapp.com',
-    storageBucket: 'vital-range-448621-q8.firebasestorage.app',
+    apiKey: 'AIzaSyBWdZOjqGiSjUrmgulTODivWLq-Xmh3lw0',
+    appId: '1:75814891396:web:a0fd3f3e5892b86a2737d1',
+    messagingSenderId: '75814891396',
+    projectId: 'expense-tracker-455519',
+    authDomain: 'expense-tracker-455519.firebaseapp.com',
+    storageBucket: 'expense-tracker-455519.firebasestorage.app',
   );
 
 }

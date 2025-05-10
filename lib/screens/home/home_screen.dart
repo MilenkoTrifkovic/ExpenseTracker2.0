@@ -1,5 +1,5 @@
 import 'package:expense_tracker_2/providers/record_store_provider.dart';
-import 'package:expense_tracker_2/screens/home/new_record.dart';
+import 'package:expense_tracker_2/screens/home/new_record/new_record.dart';
 import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:expense_tracker_2/widgets/date_navigator.dart';
@@ -95,9 +95,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                             CrossAxisAlignment.start,
                                         children: [
                                           StyledHeading(e.transaction),
-                                          StyledText(e.description.length > 20
-                                              ? '${e.description.substring(0, 20)}...'
-                                              : e.description),
+                                          StyledText(
+                                              text: e.description.length > 20
+                                                  ? '${e.description.substring(0, 20)}...'
+                                                  : e.description),
                                         ],
                                       ),
                                     ),
@@ -108,7 +109,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                       child: Column(
                                         children: [
                                           StyledText(
-                                              e.date.toString().split(' ')[0]),
+                                            text:
+                                                e.date.toString().split(' ')[0],
+                                          ),
                                           StyledTitle(
                                               '\$${e.price.toStringAsFixed(2)}'),
                                         ],

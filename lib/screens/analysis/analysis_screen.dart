@@ -88,16 +88,14 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
 //PIE CHART FUNCTIONS//
   Widget _buildPieChart() {
     return Center(
-      child: Expanded(
-        child: LayoutBuilder(
-          builder: (context, constrains) {
-            return PieChart(PieChartData(
-              sections: pieChartSection(transaction: _transactionType, constrains: constrains),
-              sectionsSpace: 1,
-              centerSpaceRadius: 0,
-            ));
-          }
-        ),
+      child: LayoutBuilder(
+        builder: (context, constrains) {
+          return PieChart(PieChartData(
+            sections: pieChartSection(transaction: _transactionType, constrains: constrains),
+            sectionsSpace: 1,
+            centerSpaceRadius: 0,
+          ));
+        }
       ),
     );
   }
@@ -137,7 +135,7 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
                 color: Colors.white, fontWeight: FontWeight.bold),
             titlePositionPercentageOffset: 0.65,
             badgePositionPercentageOffset: 1,
-            borderSide: BorderSide(color: Colors.white, width: 2),
+            borderSide: const BorderSide(color: Colors.white, width: 2),
             badgeWidget: transaction == 'expense'
                 ? SizedBox(
                     height: 60,

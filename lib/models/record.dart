@@ -11,7 +11,7 @@ class TransactionRecord {
   });
   final DateTime date;
   final String transaction;
-  final Category category;
+  final TransactionCategory category;
   final String description;
   final double price;
 
@@ -32,10 +32,10 @@ class TransactionRecord {
     final data = snapshot.data();
     TransactionRecord transactionRecord = TransactionRecord(
         date: (data!['date'] as Timestamp).toDate(),
-        transaction: data!['transaction'],
-        category: Category(
-            categoryName: data!['category_name'], icon: data['category_icon']),
-        description: data!['description'],
+        transaction: data['transaction'],
+        category: TransactionCategory(
+            categoryName: data['category_name'], icon: data['category_icon']),
+        description: data['description'],
         price: data['price']);
 
     return transactionRecord;
@@ -46,10 +46,10 @@ class TransactionRecord {
         DateTime.fromMillisecondsSinceEpoch(dateMap['_seconds'] * 1000);
     return TransactionRecord(
       date: date,
-      transaction: json!['transaction'],
-      category: Category(
-          categoryName: json!['category_name'], icon: json['category_icon']),
-      description: json!['description'],
+      transaction: json['transaction'],
+      category: TransactionCategory(
+          categoryName: json['category_name'], icon: json['category_icon']),
+      description: json['description'],
       price: (json['price'] is int)
           ? (json['price'] as int).toDouble()
           : json['price'].toDouble(),
