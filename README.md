@@ -225,6 +225,7 @@ The app uses **Firebase Firestore** to store and retrieve records.
 - **uuid**: For generating unique IDs.    
 - **intl**: For internationalization and date/number formatting.  
 - **path_provider**: For accessing commonly used locations on the filesystem.
+- **mocktail**: For mocking dependencies in tests, especially useful for testing services and providers.
 
 
 
