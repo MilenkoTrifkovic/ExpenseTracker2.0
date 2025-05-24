@@ -67,7 +67,6 @@ class _ProfileFormState extends State<ProfileForm> {
     return Form(
       key: widget.formKey,
       child: Column(
-        // crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           //NAME
           Padding(

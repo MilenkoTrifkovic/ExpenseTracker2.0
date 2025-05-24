@@ -52,37 +52,5 @@ class _ShareWithFriendsState extends State<ShareWithFriends> {
       },
       child: const Icon(Icons.share),
     );
-    // ElevatedButton(
-    //     onPressed: () async {
-    //       try {
-    //         // Step 1: Load the asset image
-    //         final byteData = await rootBundle
-    //             .load('assets/imgs_shared/share_to_friends.jpg');
-
-    //         // Step 2: Create a temporary file
-    //         final tempDir = await getTemporaryDirectory();
-    //         final tempFile = File('${tempDir.path}/invitation.jpg');
-    //         await tempFile.writeAsBytes(byteData.buffer.asUint8List());
-
-    //         // Step 3: Share the file using share_plus
-    //         final result = await Share.shareXFiles(
-    //           [
-    //             XFile(tempFile.path),
-    //           ],
-    //           text:
-    //               'Download link #', //download link could be placed here, but it doesn't work with all platforms as expected...
-    //         );
-
-    //         // Step 4: Check the result
-    //         if (result.status == ShareResultStatus.success) {
-    //           print('Image shared successfully!');
-    //         } else {
-    //           print('Sharing was canceled or failed.');
-    //         }
-    //       } catch (e) {
-    //         print('Error sharing image: $e');
-    //       }
-    //     },
-    //     child: Text('Click'));
   }
 }

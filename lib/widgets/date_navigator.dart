@@ -1,33 +1,48 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
+import 'package:riverpod_annotation/riverpod_annotation.dart';
+part 'date_navigator.g.dart';
 
-class DateNavigatorContainer extends StatelessWidget {
-  final DateTime selectedDate;
-  final VoidCallback onPrevious;
-  final VoidCallback onNext;
+@riverpod
+class NavigatorDate extends _$NavigatorDate {
+  @override
+  DateTime build() => DateTime(DateTime.now().year, DateTime.now().month);
+  void moveToNextMonth() {
+    state = DateTime(state.year, state.month + 1);
+  }
 
-  const DateNavigatorContainer({
-    super.key,
-    required this.selectedDate,
-    required this.onPrevious,
-    required this.onNext,
-  });
+  void moveToPreviousMonth() {
+    state = DateTime(state.year, state.month - 1);
+  }
+}
+
+class DateNavigatorContainer extends ConsumerStatefulWidget {
+  const DateNavigatorContainer({super.key});
 
   @override
+  ConsumerState<DateNavigatorContainer> createState() => _DateNavigatorContainerState();
+}
+
+class _DateNavigatorContainerState extends ConsumerState<DateNavigatorContainer> {
+  @override
   Widget build(BuildContext context) {
-    String formattedDate = DateFormat('MMMM yyyy').format(selectedDate);
+    final dateNotifier = ref.read(navigatorDateProvider.notifier);
+    final dateProvider = ref.watch(navigatorDateProvider);
+
+    String formattedDate = DateFormat('MMMM yyyy').format(dateProvider);
 
     return Center(
-      // decoration: BoxDecoration(
-      //   color: AppColors.primaryColor.withOpacity(0.1),
-      // ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           TextButton(
-            onPressed: onPrevious,
+            onPressed: () {
+              dateNotifier.moveToPreviousMonth();
+              setState(() {});
+            },
             child: Icon(
               Icons.arrow_back,
               color: AppColors.textColor,
@@ -37,7 +52,10 @@ class DateNavigatorContainer extends StatelessWidget {
           StyledHeading(formattedDate),
           const SizedBox(width: 10),
           TextButton(
-            onPressed: onNext,
+            onPressed: () {
+              dateNotifier.moveToNextMonth();
+              setState(() {});
+            },
             child: Icon(
               Icons.arrow_forward,
               color: AppColors.textColor,

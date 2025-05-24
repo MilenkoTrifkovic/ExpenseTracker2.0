@@ -9,6 +9,9 @@ class TransactionCategory {
   Map<String, dynamic> toFirestore() {
     return {'categoryName': categoryName, 'icon': icon.toString()};
   }
+  ///Updates any of the fields of the TransactionCategory object.
+  ///If the field is not provided, it will not be updated.
+  ///Returns the updated TransactionCategory object.
   TransactionCategory updateTransactionCategory({String? newCategoryName, String? newIcon, double? newConfidence}){
     categoryName = newCategoryName?? categoryName;
     icon = newIcon?? icon;

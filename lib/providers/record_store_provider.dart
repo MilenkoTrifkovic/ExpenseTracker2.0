@@ -5,6 +5,11 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'record_store_provider.g.dart';
 
+/// A [RecordsNotifier] is a Riverpod state notifier that manages a set of
+/// [TransactionRecord] objects fetched from Firestore.
+///
+/// It starts with an empty set and provides a method to fetch all user
+/// transaction records from the Firestore database.
 @riverpod
 class RecordsNotifier extends _$RecordsNotifier {
   @override
@@ -12,8 +17,13 @@ class RecordsNotifier extends _$RecordsNotifier {
     return {};
   }
 
+  /// Fetches all transaction records for the current user from Firestore.
+  ///
+  /// This method retrieves the data using [FirestoreService.getUserRecords],
+  /// maps the Firestore documents into [TransactionRecord] instances, and
+  /// updates the state with the new records.
   Future<void> fetchAllRecords() async {
-    // Fetch new records
+    // Fetch new records from Firestore
     QuerySnapshot<TransactionRecord> snapshot =
         await FirestoreService.getUserRecords();
 
@@ -29,8 +39,10 @@ class RecordsNotifier extends _$RecordsNotifier {
         date: doc.data().date,
       ));
     }
-
-    // Update state once to prevent unnecessary rebuilds
-    state = newRecords;
+    List<TransactionRecord> records = newRecords.toList();
+    records.sort((a, b) => b.date.compareTo(a.date));
+    Set<TransactionRecord> sortedRecords = records.toSet();
+  // Update the state with the new set of records
+    state = sortedRecords;
   }
 }

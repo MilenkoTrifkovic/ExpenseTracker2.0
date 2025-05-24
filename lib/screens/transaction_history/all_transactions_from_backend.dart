@@ -27,7 +27,6 @@ class AllTransactionsFromBackend extends ConsumerWidget {
                   children: [
                     providedRecords.when(
                       data: (records) {
-                        print("Records: $records");
 
                         return Expanded(
                           child: ListView.builder(

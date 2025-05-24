@@ -37,15 +37,25 @@ class StyledTitle extends StatelessWidget {
 }
 
 class StyledHeading extends StatelessWidget {
-  const StyledHeading(this.text, {super.key});
+  const StyledHeading(
+    this.text, {
+    super.key,
+    this.color,
+  });
 
   final String text;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    return Text(text.toUpperCase(),
-        style: GoogleFonts.kanit(
-          textStyle: Theme.of(context).textTheme.headlineMedium,
-        ));
+    return Text(
+      text.toUpperCase(),
+      style: GoogleFonts.kanit(
+        textStyle: Theme.of(context).textTheme.headlineMedium?.copyWith(
+              color: color, 
+            ),
+      ),
+    );
   }
 }
+

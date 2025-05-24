@@ -3,6 +3,7 @@ import 'package:expense_tracker_2/models/record.dart';
 import 'package:expense_tracker_2/providers/record_store_provider.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:expense_tracker_2/widgets/date_navigator.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,30 +16,12 @@ class AnalysisScreen extends ConsumerStatefulWidget {
 }
 
 class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
-  DateTime selectedPeriod = DateTime.now();
-
   final List<Widget> fruits = <Widget>[
     const Text('Income'),
     const Text('Expense'),
   ];
   final List<bool> _selectedButtons = <bool>[true, false];
   String _transactionType = 'income';
-  //DATE NAVIGATOR FUNCTIONS//
-  void _moveToNextMonth() {
-    setState(() {
-      selectedPeriod = DateTime(
-          selectedPeriod.year, selectedPeriod.month + 1, selectedPeriod.day);
-    });
-  }
-
-  void _moveToPreviousMonth() {
-    setState(() {
-      selectedPeriod = DateTime(
-          selectedPeriod.year, selectedPeriod.month - 1, selectedPeriod.day);
-    });
-  }
-
-  //END OF DATE NAVIGATOR FUNCTIONS//
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,10 +29,7 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
         padding: const EdgeInsets.all(30),
         child: Column(
           children: [
-            DateNavigatorContainer(
-                selectedDate: selectedPeriod,
-                onPrevious: _moveToPreviousMonth,
-                onNext: _moveToNextMonth),
+            const DateNavigatorContainer(),
             ToggleButtons(
               direction: Axis.horizontal,
               onPressed: (int index) {
@@ -88,19 +68,19 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
 //PIE CHART FUNCTIONS//
   Widget _buildPieChart() {
     return Center(
-      child: LayoutBuilder(
-        builder: (context, constrains) {
-          return PieChart(PieChartData(
-            sections: pieChartSection(transaction: _transactionType, constrains: constrains),
-            sectionsSpace: 1,
-            centerSpaceRadius: 0,
-          ));
-        }
-      ),
+      child: LayoutBuilder(builder: (context, constrains) {
+        return PieChart(PieChartData(
+          sections: pieChartSection(
+              transaction: _transactionType, constrains: constrains),
+          sectionsSpace: 1,
+          centerSpaceRadius: 0,
+        ));
+      }),
     );
   }
 
-  List<PieChartSectionData> pieChartSection({required String transaction, required BoxConstraints constrains}) {
+  List<PieChartSectionData> pieChartSection(
+      {required String transaction, required BoxConstraints constrains}) {
     List<Color> colors = [
       Colors.red,
       Colors.blue,
@@ -110,6 +90,8 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
       Colors.green
     ];
     Set<TransactionRecord> records = ref.watch(recordsNotifierProvider);
+    DateTime selectedPeriod = ref.watch(navigatorDateProvider);
+
     Map<String, double> balance = {};
     for (var rec in records.where((element) =>
         element.transaction == transaction &&
@@ -125,36 +107,47 @@ class _AnalysisScreenState extends ConsumerState<AnalysisScreen> {
       (index) {
         var entry = balance.entries.elementAt(index);
         return PieChartSectionData(
-        // There will be an exception if the Pie charts don't have the same number of slices
-        //Enabled animation could be a problem
+            // There will be an exception if the Pie charts don't have the same number of slices
+            //Enabled animation could be a problem
             value: entry.value,
             color: colors[index],
-            radius: constrains.maxWidth < constrains.maxHeight? constrains.maxWidth * 0.4:constrains.maxHeight*0.4,
+            radius: constrains.maxWidth < constrains.maxHeight
+                ? constrains.maxWidth * 0.35
+                : constrains.maxHeight * 0.35,
             title: entry.value.toString(),
             titleStyle: const TextStyle(
                 color: Colors.white, fontWeight: FontWeight.bold),
             titlePositionPercentageOffset: 0.65,
-            badgePositionPercentageOffset: 1,
+            badgePositionPercentageOffset: 1.4,
             borderSide: const BorderSide(color: Colors.white, width: 2),
             badgeWidget: transaction == 'expense'
                 ? SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset(
-                      (expenseCategories.firstWhere(
-                          (e) => e.categoryName == entry.key.toString())).icon,
+                    height: 80,
+                    width: 80,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          (expenseCategories.firstWhere(
+                              (e) => e.categoryName == entry.key.toString())).icon,
+                        ),
+                        StyledText(text: entry.key.toString(), textColor: Colors.white,),
+                      ],
                     ),
                   )
-                : SizedBox(
-                    height: 60,
-                    width: 60,
-                    child: Image.asset(
-                      (incomeCategories.firstWhere(
-                          (e) => e.categoryName == entry.key.toString())).icon,
+                :  SizedBox(
+                    height: 80,
+                    width: 80,
+                    child: Column(
+                      children: [
+                        Image.asset(
+                          (incomeCategories.firstWhere(
+                              (e) => e.categoryName == entry.key.toString())).icon,
+                        ),
+                        StyledText(text: entry.key.toString(), textColor: Colors.white,),
+                      ],
                     ),
                   ));
       },
     );
   }
-  //END OF PIE CHART FUNTIONS//
 }

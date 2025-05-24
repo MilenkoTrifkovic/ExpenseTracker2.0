@@ -16,7 +16,7 @@ class AccountInfo {
       'firstName': firstName,
       'lastName': lastName,
       'yearOfBirth': yearOfBirth,
-      'adress': address,
+      'address': address,
       'phoneNumber': phoneNumber,
     };
   }

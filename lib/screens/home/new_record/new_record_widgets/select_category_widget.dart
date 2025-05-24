@@ -2,21 +2,17 @@ import 'package:expense_tracker_2/Theme/theme.dart';
 import 'package:expense_tracker_2/models/category.dart';
 import 'package:expense_tracker_2/models/transaction_type.dart';
 import 'package:expense_tracker_2/providers/expense_categories_provider.dart';
+import 'package:expense_tracker_2/screens/home/new_record/providers/new_record_providers.dart';
 import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class SelectCategoryWidget extends ConsumerStatefulWidget {
-  final TransactionStatus selectedTransactionStatus;
-  final Function(TransactionCategory) changeCategory;
   final TransactionCategory selectedCategory;
-  final TransactionStatus transactionStatus;
   const SelectCategoryWidget(
       {super.key,
-      required this.selectedTransactionStatus,
-      required this.changeCategory,
       required this.selectedCategory,
-      required this.transactionStatus});
+      });
 
   @override
   ConsumerState<SelectCategoryWidget> createState() =>
@@ -36,7 +32,7 @@ class _SelectCategoryWidgetState extends ConsumerState<SelectCategoryWidget> {
   @override
   Widget build(BuildContext context) {
     final asyncCategories =
-        widget.transactionStatus == TransactionStatus.expense
+        ref.watch(newRecordSelectedTransactionStatusProvider) == TransactionStatus.expense
             ? ref.watch(expenseCategoriesProvider)
             : ref.watch(incomeCategoriesProvider);
 
@@ -89,51 +85,50 @@ class _SelectCategoryWidgetState extends ConsumerState<SelectCategoryWidget> {
                         itemBuilder: (context, index) {
                           return ListTile(
                             // leading: ,
-                            title: Container(
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor:
-                                      Colors.white.withOpacity(0.5),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    widget.changeCategory(data[index]);
-                                  });
-                                  Navigator.pop(context);
-                                },
-                                child: Row(
-                                  children: [
-                                    Text('•',
-                                        style: TextStyle(
-                                            fontSize: 32,
-                                            color: data[index].confidence != 0
-                                                ? Color.lerp(
-                                                    Colors.white,
-                                                    AppColors.highlightColor,
-                                                    data[index]
-                                                        .confidence!
-                                                        .clamp(0.0, 1.0),
-                                                  )
-                                                : Colors.white)),
-                                    const SizedBox(
-                                      width: 10,
-                                    ),
-                                    Image.asset(
-                                      data[index].icon,
-                                      height: 30,
-                                    ),
-                                    Expanded(child: SizedBox()),
-                                    StyledHeading(data[index].categoryName),
-                                  ],
-                                ),
+                            title: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor:
+                                    Colors.white.withOpacity(0.5),
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  ref.read(newRecordSelectedCategoryProvider.notifier)
+                                      .changeCategory(data[index]);
+                                });
+                                Navigator.pop(context);
+                              },
+                              child: Row(
+                                children: [
+                                  Text('•',
+                                      style: TextStyle(
+                                          fontSize: 32,
+                                          color: data[index].confidence != 0
+                                              ? Color.lerp(
+                                                  Colors.white,
+                                                  AppColors.highlightColor,
+                                                  data[index]
+                                                      .confidence!
+                                                      .clamp(0.0, 1.0),
+                                                )
+                                              : Colors.white)),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  Image.asset(
+                                    data[index].icon,
+                                    height: 30,
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                  StyledHeading(data[index].categoryName),
+                                ],
                               ),
                             ),
                           );
                         },
                       );
                     },
-                    error: (error, stackTrace) => Text('Error'),
-                    loading: () => Text('Loading'),
+                    error: (error, stackTrace) => const Text('Error'),
+                    loading: () => const Text('Loading'),
                   )),
                 ],
               ),

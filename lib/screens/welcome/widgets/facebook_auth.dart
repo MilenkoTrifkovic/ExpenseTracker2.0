@@ -1,4 +1,5 @@
 import 'package:expense_tracker_2/services/firebase_services/auth_services.dart';
+import 'package:expense_tracker_2/utils/show_error_snack_bar_utils.dart';
 import 'package:flutter/material.dart';
 
 class FacebookAuthWidget extends StatefulWidget {
@@ -12,20 +13,13 @@ class _FacebookAuthWidgetState extends State<FacebookAuthWidget> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () async {
-  final loginResult = await AuthServices.signInWithFacebook();
-
-  // Ensure the widget is still mounted before using the context
-  if (!mounted) return;
-
-  if (loginResult == null) {
-    const snackBar = SnackBar(
-      content: Center(child: Text('Unable to log in with Facebook!')),
-    );
-    // Context shouldn't be used In Asynchronousfunction function
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  }
-},
+      onPressed: () {
+        try {
+          AuthServices.signInWithFacebook();
+        } on Exception catch (e) {
+          showErrorSnackBar(context, 'Unable to log in with Facebook!');
+        }
+      },
       icon: const Icon(Icons.facebook, color: Colors.white),
       label: const Text(
         'Continue with Facebook',

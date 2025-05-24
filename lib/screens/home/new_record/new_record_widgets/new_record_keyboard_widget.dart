@@ -10,18 +10,12 @@ class KeyboardAux extends ConsumerStatefulWidget {
   VirtualKeyboardType typeKeyboard;
   TypeLayout typeLayout;
   bool alwaysCaps;
-  // final void Function(String) changeInsertedAmount;
-  // final void Function() deleteOneDigitInsertedAmount;
-  // final String insertedAmount;
   KeyboardAux({
     Key? key,
     this.alwaysCaps = false,
     this.controller,
     this.typeLayout = TypeLayout.numeric,
     required this.typeKeyboard,
-    // required this.changeInsertedAmount,
-    // required this.insertedAmount,
-    // required this.deleteOneDigitInsertedAmount,
   }) : super(key: key);
 
   @override
@@ -65,9 +59,9 @@ class _KeyboardAuxState extends ConsumerState<KeyboardAux> {
 
   onKeyPress(VirtualKeyboardKey key) {
     if (key.keyType == VirtualKeyboardKeyType.String) {
-      ref.read(totalAmountProvider.notifier).addLastDigitTotalAmount(key.text!);
+      ref.read(newRecordTotalAmountProvider.notifier).addLastDigitTotalAmount(key.text!);
     } else {
-      ref.read(totalAmountProvider.notifier).removeLastDigitTotalAmount();
+      ref.read(newRecordTotalAmountProvider.notifier).removeLastDigitTotalAmount();
     }
   }
 }

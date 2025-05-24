@@ -1,5 +1,8 @@
 import 'package:expense_tracker_2/services/firebase_services/auth_services.dart';
 import 'package:expense_tracker_2/Theme/theme.dart';
+import 'package:expense_tracker_2/utils/show_error_snack_bar_utils.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_button.dart';
+import 'package:expense_tracker_2/widgets/styled_widgets/styled_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -66,14 +69,22 @@ class _SignInState extends State<SignIn> {
               const SizedBox(
                 height: 20,
               ),
-              ElevatedButton(
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
+              StyledButton(
+                onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    try {
                       AuthServices.signIn(
                           _emailController.text, _passwordController.text);
+                    } on Exception catch (e) {
+                      showErrorSnackBar(context, 'Try again');
                     }
-                  },
-                  child: const Text("Sign In"))
+                  }
+                },
+                child: StyledText(
+                  text: 'Sign In',
+                  textColor: AppColors.textColor,
+                ),
+              )
             ],
           ),
         ));

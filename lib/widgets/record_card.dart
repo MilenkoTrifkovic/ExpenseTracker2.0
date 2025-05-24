@@ -38,7 +38,7 @@ class RecordCard extends StatelessWidget {
               children: [
                 StyledHeading(transaction),
                 StyledText(text : description.length > 20
-                    ? '${description.substring(0, 20)}...'
+                    ? '${description.substring(0, 15)}...'
                     : description),
               ],
             ),
