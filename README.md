@@ -158,6 +158,7 @@ This project has been my hands-on Flutter learning journey—from a simple proto
 
 - Refactor the codebase for cleaner architecture and replace suboptimal widgets with more appropriate alternatives.  
 - Expand unit and widget tests to cover more UI flows and edge cases.
+- Improve security by avoiding hardcoded URLs and sensitive values inside the codebase—for example, moving function URLs to environment variables or secure configuration.
  
 
 
